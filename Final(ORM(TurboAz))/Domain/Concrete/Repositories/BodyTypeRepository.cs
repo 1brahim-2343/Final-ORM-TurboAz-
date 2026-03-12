@@ -27,7 +27,7 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
             }
             catch (Exception ex)
             {
-                ex.Message.ShowMessage();
+                ex.Message.ShowErrorMessage();
             }
             return addedObj;
         }
@@ -86,6 +86,16 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
         {
             var objToGet = _context.BodyTypes.Where(exp);
             return objToGet;
+        }
+
+        public void PrintAll(IEnumerable<BodyType> values)
+        {
+            Console.Clear();
+            var bodyTypes = values.ToList();
+            for (int i = 0; i < bodyTypes.Count; i++)
+            {
+                Console.WriteLine($"{i+1}.{bodyTypes[i].Name}");
+            }
         }
 
         public int SaveChanges()

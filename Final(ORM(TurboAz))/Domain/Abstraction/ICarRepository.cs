@@ -10,5 +10,10 @@ namespace Final_ORM_TurboAz__.Domain.Abstraction
     public interface ICarRepository : IRepository<Car>
     {
         void DecreaseQuantityByOne(Car obj);
+
+        void PrintCarWDetails(int id);
+
+        void PrintCarWODetails(int id);
+        IEnumerable<Car> GetAllNewCars();
     }
 }

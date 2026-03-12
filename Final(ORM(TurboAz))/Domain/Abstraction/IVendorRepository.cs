@@ -9,6 +9,5 @@ namespace Final_ORM_TurboAz__.Domain.Abstraction
 {
     public interface IVendorRepository : IRepository<Vendor>
     {
-
     }
 }

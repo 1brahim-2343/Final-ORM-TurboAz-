@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
 {
-    internal class ColorRepository:IColorRepository
+    internal class ColorRepository : IColorRepository
     {
         private readonly TurboContext _context;
         public ColorRepository(TurboContext context)
@@ -27,7 +27,7 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
             }
             catch (Exception ex)
             {
-                ex.Message.ShowMessage();
+                ex.Message.ShowErrorMessage();
             }
             return addedObj;
         }
@@ -86,6 +86,16 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
         {
             var objToGet = _context.Colors.Where(exp);
             return objToGet;
+        }
+
+        public void PrintAll(IEnumerable<Color> values)
+        {
+            Console.Clear();
+            var colors = values.ToList();
+            for (int i = 0; i < colors.Count; i++)
+            {
+                Console.WriteLine($"{i+1}.{colors[i].Name}");
+            }
         }
 
         public int SaveChanges()

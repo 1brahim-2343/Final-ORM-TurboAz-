@@ -21,7 +21,8 @@ namespace Final_ORM_TurboAz__.Domain.Abstraction
         bool Delete(Expression<Func<T, bool>> exp);
         int SaveChanges();
 
+        void PrintAll(IEnumerable<T> values);
 
-
+        
     }
 }

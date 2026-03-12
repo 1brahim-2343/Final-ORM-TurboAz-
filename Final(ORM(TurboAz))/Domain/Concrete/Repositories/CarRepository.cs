@@ -27,7 +27,7 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
             }
             catch (Exception ex)
             {
-                ex.Message.ShowMessage();
+                ex.Message.ShowErrorMessage();
             }
             return addedObj;
         }
@@ -82,11 +82,9 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
         {
             var objToGet = _context.Cars.FirstOrDefault(exp);
             return objToGet;
-            
+
         }
 
-
-        
         public IEnumerable<Car> GetAll()
         {
             return _context.Cars;
@@ -95,7 +93,48 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
         public IEnumerable<Car> GetAll(Expression<Func<Car, bool>> exp)
         {
             var objToGet = _context.Cars.Where(exp);
-            return objToGet;
+            return objToGet.ToList();
+        }
+
+        public IEnumerable<Car> GetAllNewCars()
+        {
+            var newCars = GetAll(c => c.IsNew == true);
+            return newCars;
+        }
+
+        public void PrintAll(IEnumerable<Car> values)
+        {
+            Console.Clear();
+            var cars = values.ToList();
+            for (int i = 0; i < cars.Count; i++)
+            {
+                Console.WriteLine($"{i+1}.{cars[i].Vendor.Name} -- {cars[i].Model}");
+            }
+        }
+
+        public void PrintCarWDetails(int id)
+        {
+            var carToShow = Get(id);
+            if (carToShow != null)
+            {
+                Console.WriteLine($"{carToShow.Vendor.Name} - {carToShow.Model}");
+                Console.WriteLine($"\tYear: {carToShow.ProductionDate.Year}\n\tEngine Volume: {carToShow.EngineVolume}\n\tBody-Type: {carToShow.BodyType.Name}\n\tColor: {carToShow.Color.Name}\n\tFuel: {carToShow.FuelType}\n\tNew: {(carToShow.IsNew ? "Yes" : "No")}\n\tMileage: {carToShow.Mileage}KM\n\tPrice: ${carToShow.Price}\n\tQuantity: {carToShow.Quantity}");
+            }
+           
+            Console.WriteLine('-'.GetFullDelimiter());
+        }
+
+        public void PrintCarWODetails(int id)
+        {
+            var carToShow = Get(id);
+            if (carToShow != null)
+            {
+                Console.WriteLine($"{carToShow.Vendor.Name} - {carToShow.Model}");
+                Console.WriteLine($"\tYear: {carToShow.ProductionDate.Year}\n\tMileage:{carToShow.Mileage}\n\tEngine: {carToShow.EngineVolume}");
+                Console.WriteLine('-'.GetFullDelimiter());
+
+            }
+
         }
 
         public int SaveChanges()

@@ -19,6 +19,8 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Entities.Mapping
                 .HasMaxLength(130)
                 .IsRequired();
 
+            
+
             builder.Property(c => c.VendorId)
                 .IsRequired();
 

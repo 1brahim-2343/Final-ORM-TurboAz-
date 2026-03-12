@@ -27,7 +27,7 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
             }
             catch (Exception ex)
             {
-                ex.Message.ShowMessage();
+                ex.Message.ShowErrorMessage();
             }
             return addedObj;
         }
@@ -88,10 +88,21 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
             return objToGet;
         }
 
+        public void PrintAll(IEnumerable<Vendor> values)
+        {
+            Console.Clear();
+            var vendors = values.ToList();
+            for (int i = 0; i < vendors.Count; i++)
+            {
+                Console.WriteLine($"{i+1}.{vendors[i].Name}");
+            }
+        }
+
         public int SaveChanges()
         {
             return _context.SaveChanges();
         }
+
 
         public bool Update(Vendor obj)
         {

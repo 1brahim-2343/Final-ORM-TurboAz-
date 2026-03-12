@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Final_ORM_TurboAz__.Migrations
 {
     [DbContext(typeof(TurboContext))]
-    [Migration("20260311235059_Init")]
+    [Migration("20260312160808_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -55,6 +55,9 @@ namespace Final_ORM_TurboAz__.Migrations
 
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
+
+                    b.Property<double>("EngineVolume")
+                        .HasColumnType("float");
 
                     b.Property<string>("FuelType")
                         .IsRequired()

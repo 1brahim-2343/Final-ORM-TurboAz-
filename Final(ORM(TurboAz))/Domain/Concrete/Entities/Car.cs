@@ -37,6 +37,29 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Entities
         public virtual Color Color { get; set; }
         public FuelType FuelType { get; set; }
 
+        private double engineVolume;
+
+        public double EngineVolume
+        {
+            get { return engineVolume; }
+            set
+            {
+                if (FuelType == FuelType.Electric)
+                {
+                    engineVolume = 0.0;
+                }
+                else if (value >= 0)
+                {
+                    engineVolume = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Engine volume must be greater than 0");
+                }
+            }
+        }
+
+
         public bool IsNew { get; set; }
 
         private int mileage;
@@ -46,11 +69,11 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Entities
             get { return mileage; }
             set
             {
-                if(value < 0 || (IsNew == true && value != 0) )
+                if (value < 0 || (IsNew == true && value != 0))
                 {
                     throw new ArgumentException($"Mileage value,{value} error. Check whether >= 0 or the car is new\\used");
                 }
-                if(IsNew == true)
+                if (IsNew == true)
                 {
                     mileage = 0;
                 }
@@ -69,6 +92,7 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Entities
                 {
                     throw new ArgumentException($"Invalid date input,{value}");
                 }
+                productionDate = value;
             }
         }
 

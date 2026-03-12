@@ -53,6 +53,9 @@ namespace Final_ORM_TurboAz__.Migrations
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
 
+                    b.Property<double>("EngineVolume")
+                        .HasColumnType("float");
+
                     b.Property<string>("FuelType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

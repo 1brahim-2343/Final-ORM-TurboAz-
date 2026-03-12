@@ -59,6 +59,7 @@ namespace Final_ORM_TurboAz__.Migrations
                     BodyTypeId = table.Column<int>(type: "int", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
                     FuelType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EngineVolume = table.Column<double>(type: "float", nullable: false),
                     IsNew = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     Mileage = table.Column<int>(type: "int", nullable: false),
                     ProductionDate = table.Column<DateOnly>(type: "date", nullable: false),
