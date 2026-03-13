@@ -63,6 +63,7 @@ namespace Final_ORM_TurboAz__.Helpers.HelperMethods_User_
             if (newUser != null)
             {
                 _context.UserRepository.Add(newUser);
+                _context.UserRepository.SaveChanges();
                 return newUser.Id;
             }
             else
