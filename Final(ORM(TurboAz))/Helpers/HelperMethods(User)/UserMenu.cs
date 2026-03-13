@@ -59,8 +59,8 @@ namespace Final_ORM_TurboAz__.Helpers.HelperMethods_User_
             {
                 ex.Message.ShowErrorMessage();
             }
-
-            if (newUser != null)
+            var userInDbOrNot = _context.UserRepository.Get(u => u.Username == uName);
+            if (newUser != null && userInDbOrNot == null)
             {
                 _context.UserRepository.Add(newUser);
                 _context.UserRepository.SaveChanges();
