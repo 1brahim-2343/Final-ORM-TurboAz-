@@ -15,6 +15,8 @@ namespace Final_ORM_TurboAz__.DataAccess
         public DbSet<BodyType> BodyTypes { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TurboAzDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30")
@@ -28,6 +30,7 @@ namespace Final_ORM_TurboAz__.DataAccess
             modelBuilder.ApplyConfiguration(new CarMap());
             modelBuilder.ApplyConfiguration(new ColorMap());
             modelBuilder.ApplyConfiguration(new VendorMap());
+            modelBuilder.ApplyConfiguration(new UserMap());
         }
     }
 }

@@ -16,37 +16,210 @@ namespace Final_ORM_TurboAz__.Helpers.HelperMethods_User_
         {
             _context = context;
         }
-        public void Start()
+        public int SignIn()
         {
-            Console.WriteLine("[1] Show All Cars(Vendor&Model)");
-            Console.WriteLine("[2] Show New Cars Only");
-            Console.WriteLine("[3] Custom Filter");
-            var choice = Console.ReadKey();
+            string? uName = " ";
+            string? uPassword = " ";
+            Console.Write("\bEnter Username: ");
+            uName = Console.ReadLine();
+            Console.Write("Enter Password: ");
+            uPassword = Console.ReadLine();
 
+            var usersInDB = _context.UserRepository.GetAll().ToList();
+            var userInDb = usersInDB.Find(u => u.Username == uName && u.CheckPassword(uPassword));
+            if (userInDb != null)
+                return userInDb.Id;
+            else
+            {
+                "Try again!".ShowErrorMessage();
+                Thread.Sleep(1000);
+                Console.Clear();
+                SignIn();
+            }
+            return -1;
+        }
+        public int SignUp()
+        {
+            string? uName = " ";
+            string? uPassword = " ";
+            Console.Write("\bEnter Username: ");
+            uName = Console.ReadLine();
+            Console.Write("Enter Password: ");
+            uPassword = Console.ReadLine();
+            User newUser = null;
+            try
+            {
+                newUser = new()
+                {
+                    Username = uName,
+                    Password = uPassword
+                };
+            }
+            catch (Exception ex)
+            {
+                ex.Message.ShowErrorMessage();
+            }
+
+            if (newUser != null)
+            {
+                _context.UserRepository.Add(newUser);
+                return newUser.Id;
+            }
+            else
+            {
+                "Try again!".ShowErrorMessage();
+                Thread.Sleep(1000);
+                Console.Clear();
+                SignUp();
+            }
+            return -1;
+        }
+        public int UserSignInMenu()
+        {
+            Console.WriteLine("[1] Sign in");
+            Console.WriteLine("[2] Sign up");
+            var choice = Console.ReadKey();
             switch (choice.Key)
             {
                 case ConsoleKey.D1:
-                    {
-
-                        var cars = _context.CarRepository.GetAll();
-                        _context.CarRepository.PrintAll(cars);
-                        break;
-                    }
+                    return SignIn();
                 case ConsoleKey.D2:
-                    {
-                        var newCars = _context.CarRepository.GetAllNewCars();
-                        _context.CarRepository.PrintAll(newCars);
-                        break;
-                    }
-                case ConsoleKey.D3:
-                    {
-                        int carToShow = CustomFilter();
-                        Console.Clear();
-                        _context.CarRepository.PrintCarWDetails(carToShow);
-                        break;
-                    }
+                    return SignUp();
                 default:
-                    break;
+                    Console.Clear();
+                    return UserSignInMenu();
+            }
+        }
+        public void ViewMyPosts(int userId)
+        {
+            Console.Clear();
+            var user = _context.UserRepository.Get(userId);
+            var userPosts = user.Posts.ToList();
+            for (int i = 0; i < userPosts.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. Post of {userPosts[i].Car.Model}");
+            }
+        }
+        public void WelcomeScreen() //AI
+        {
+            Console.Clear();
+            string[] frames = {
+        "        ______",
+        "  _____|_     |_____",
+        " /  ___________    \\",
+        "/  /    |   |   \\   \\",
+        "\\ /  O  |___|  O \\ /",
+        " ---(*)----------(*)-"
+    };
+
+            string[] colors = { "red", "yellow", "cyan", "green" };
+            ConsoleColor[] consoleColors = { ConsoleColor.Red, ConsoleColor.Yellow, ConsoleColor.Cyan, ConsoleColor.Green };
+
+            for (int i = 0; i < 3; i++)
+            {
+                Console.Clear();
+                Console.ForegroundColor = consoleColors[i % consoleColors.Length];
+                Console.WriteLine("\n\n");
+                foreach (var line in frames)
+                    Console.WriteLine("         " + line);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n       *** TURBOCARS ***");
+                Console.ResetColor();
+                Thread.Sleep(300);
+            }
+            Console.WriteLine("\nWelcome to TurboCars!");
+            Thread.Sleep(1700);
+            Console.Clear();
+        }
+        public void Start()
+        {
+
+            int userId = UserSignInMenu();
+            if (userId == -1)
+            {
+                UserSignInMenu();
+            }
+            WelcomeScreen();
+            bool condtion = true;
+            while (condtion)
+            {
+                Console.Clear();
+                Console.WriteLine("[1] Show All Cars(Vendor&Model)");
+                Console.WriteLine("[2] Show New Cars Only");
+                Console.WriteLine("[3] Custom Filter");
+                Console.WriteLine("[4] View My Posts");
+                var choice = Console.ReadKey();
+
+                switch (choice.Key)
+                {
+                    case ConsoleKey.D1:
+                        {
+
+                            var cars = _context.CarRepository.GetAll();
+                            _context.CarRepository.PrintAll(cars);
+                            Console.WriteLine("Press [Enter] to go back to main menu, or any other key to leave");
+                            var choiceToBreak = Console.ReadKey();
+                            if(choiceToBreak.Key == ConsoleKey.Enter)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                condtion = false; 
+                            }
+                            break;
+                        }
+                    case ConsoleKey.D2:
+                        {
+                            var newCars = _context.CarRepository.GetAllNewCars();
+                            _context.CarRepository.PrintAll(newCars);
+                            Console.WriteLine("Press [Enter] to go back to main menu, or any other key to leave");
+                            var choiceToBreak = Console.ReadKey();
+                            if (choiceToBreak.Key == ConsoleKey.Enter)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                condtion = false;
+                            }
+                            break;
+                        }
+                    case ConsoleKey.D3:
+                        {
+                            int carToShow = CustomFilter();
+                            Console.Clear();
+                            _context.CarRepository.PrintCarWDetails(carToShow);
+                            Console.WriteLine("Press [Enter] to go back to main menu, or any other key to leave");
+                            var choiceToBreak = Console.ReadKey();
+                            if (choiceToBreak.Key == ConsoleKey.Enter)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                condtion = false;
+                            }
+                            break;
+                        }
+                    case ConsoleKey.D4:
+                        {
+                            ViewMyPosts(userId);
+                            Console.WriteLine("Press [Enter] to go back to main menu, or any other key to leave");
+                            var choiceToBreak = Console.ReadKey();
+                            if (choiceToBreak.Key == ConsoleKey.Enter)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                condtion = false;
+                            }
+                            break;
+                        }
+                    default:
+                        break;
+                }
             }
         }
         private int CustomFilter()
@@ -54,7 +227,6 @@ namespace Final_ORM_TurboAz__.Helpers.HelperMethods_User_
             List<string> possibleChoices = ["Body type", "Mileage", "Production date", "Color", "Price", "Fuel type", "Engine volume"];
             List<Car>? filteredCars = null;
         CustomFilterStart:
-            //Console.Clear();
             bool conditionToContinue = true;
             while (conditionToContinue)
             {

@@ -15,6 +15,10 @@ namespace Final_ORM_TurboAz__.Domain.Abstraction
 
         public IColorRepository ColorRepository { get; }
 
-        public IBodyTypeRepository BodyTypeRepository { get;  }
+        public IBodyTypeRepository BodyTypeRepository { get;}
+
+        public IUserRepository UserRepository { get;}
+
+        public IPostRepository PostRepository { get; }
     }
 }

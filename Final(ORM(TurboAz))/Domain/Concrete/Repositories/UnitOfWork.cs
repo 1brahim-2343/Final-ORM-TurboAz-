@@ -18,5 +18,8 @@ namespace Final_ORM_TurboAz__.Domain.Concrete.Repositories
         public IColorRepository ColorRepository => new ColorRepository(_context);
 
         public IBodyTypeRepository BodyTypeRepository => new BodyTypeRepository(_context);
+        public IUserRepository UserRepository => new UserRepository(_context);
+
+        public IPostRepository PostRepository => new PostRepository(_context);
     }
 }

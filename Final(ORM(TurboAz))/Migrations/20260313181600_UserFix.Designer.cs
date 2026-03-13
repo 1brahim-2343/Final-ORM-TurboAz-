@@ -4,6 +4,7 @@ using Final_ORM_TurboAz__.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Final_ORM_TurboAz__.Migrations
 {
     [DbContext(typeof(TurboContext))]
-    partial class TurboContextModelSnapshot : ModelSnapshot
+    [Migration("20260313181600_UserFix")]
+    partial class UserFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,29 +120,6 @@ namespace Final_ORM_TurboAz__.Migrations
                     b.ToTable("Colors", (string)null);
                 });
 
-            modelBuilder.Entity("Final_ORM_TurboAz__.Domain.Concrete.Entities.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CarID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("Final_ORM_TurboAz__.Domain.Concrete.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -151,9 +131,6 @@ namespace Final_ORM_TurboAz__.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -209,30 +186,6 @@ namespace Final_ORM_TurboAz__.Migrations
                     b.Navigation("Color");
 
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("Final_ORM_TurboAz__.Domain.Concrete.Entities.Post", b =>
-                {
-                    b.HasOne("Final_ORM_TurboAz__.Domain.Concrete.Entities.Car", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Final_ORM_TurboAz__.Domain.Concrete.Entities.User", "User")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Final_ORM_TurboAz__.Domain.Concrete.Entities.User", b =>
-                {
-                    b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618
         }

@@ -555,8 +555,279 @@ namespace Final_ORM_TurboAz__.Helpers
                 Mileage = 210000
             };
 
-            context.CarRepository.AddRange(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30,c31,c32,c33,c34,c35);
+            context.CarRepository.AddRange(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20, c21, c22, c23, c24, c25, c26, c27, c28, c29, c30, c31, c32, c33, c34, c35);
             context.CarRepository.SaveChanges();
+        }
+        public static void CreateAddUser(IUnitOfWork unitOfWork)
+        {
+            var context = unitOfWork;
+            User u1 = new()
+            {
+                Username = "admin",
+                Password = "admin12"
+            };
+            unitOfWork.UserRepository.Add(u1);
+            unitOfWork.UserRepository.SaveChanges();
+        }
+
+        public static void CreateAddPosts(IUnitOfWork unitOfWork)
+        {
+            var context = unitOfWork;
+            List<int> carIds = [];
+            var cars = context.CarRepository.GetAll().ToList();
+            foreach (var car in cars)
+            {
+                carIds.Add(car.Id);
+            }
+            int counter = 0;
+            Post p1 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p2 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p3 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p4 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p5 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p6 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p7 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p8 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p9 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p10 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p11 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p12 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p13 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p14 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p15 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p16 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p17 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p18 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p19 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p20 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p21 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p22 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p23 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p24 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p25 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p26 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p27 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p28 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p29 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p30 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p31 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p32 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p33 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p34 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            Post p35 = new Post
+            {
+                CarID = carIds[counter],
+                UserId = 1
+            };
+            ++counter;
+
+            context.PostRepository.AddRange(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35);
+            context.PostRepository.SaveChanges();
+
         }
     }
 }

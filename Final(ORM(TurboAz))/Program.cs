@@ -13,11 +13,14 @@ namespace Final_ORM_TurboAz__
         static IUnitOfWork context = new UnitOfWork();
         static void Main(string[] args)
         {
+
             #region FillDBWithData //run ONLY once
             //HelperDataFill.CreateAddVendors(context);
             //HelperDataFill.CreateAddColors(context); 
             //HelperDataFill.CreateAddBodyTypes(context); 
             //HelperDataFill.CreateAddCars(context);
+            //HelperDataFill.CreateAddUser(context);
+            //HelperDataFill.CreateAddPosts(context);
             #endregion
 
             //var allCars = context.CarRepository.GetAll().ToList();
